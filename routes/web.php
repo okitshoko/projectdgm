@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\VisaController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\NotificationController;
@@ -61,4 +62,19 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/requests/{registrationRequest}/reject', [RegistrationRequestController::class, 'reject'])->name('requests.reject');
         Route::get('/requests/rejected', [RegistrationRequestController::class, 'rejected'])->name('requests.rejected');
     });
+
+
+Route::get('/init-database-xyz', function () {
+    try {
+        // Lance les migrations et le seed
+        Artisan::call('migrate:fresh', [
+            '--seed' => true,
+            '--force' => true
+        ]);
+        
+        return "Base de données Neon initialisée avec succès ! " . Artisan::output();
+    } catch (\Exception $e) {
+        return "Erreur lors de l'initialisation : " . $e->getMessage();
+    }
+});
 });
