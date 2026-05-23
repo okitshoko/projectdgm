@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="model_anafi" name="Anafi - Gestion des Visas">
+    
+    <!-- Acteurs -->
+    <packagedElement xmi:type="uml:Actor" xmi:id="actor_agent" name="Agent">
+      <ownedAttribute xmi:id="agent_name" name="name" type="string"/>
+      <ownedAttribute xmi:id="agent_email" name="email" type="string"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Actor" xmi:id="actor_admin" name="Admin">
+      <ownedAttribute xmi:id="admin_name" name="name" type="string"/>
+      <ownedAttribute xmi:id="admin_email" name="email" type="string"/>
+    </packagedElement>
+    
+    <!-- Cas d'utilisation -->
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_login" name="S'authentifier">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_login" name="Processus de login"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_logout" name="Se déconnecter">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_logout" name="Processus de logout"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_dashboard" name="Consulter le tableau de bord">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_dashboard" name="Afficher statistiques"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_list_visas" name="Lister les visas">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_list_visas" name="Afficher liste visas"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_create_visa" name="Créer un visa">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_create_visa" name="Formulaire création visa"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_view_visa" name="Consulter un visa">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_view_visa" name="Afficher détails visa"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_send_alert" name="Envoyer une alerte">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_send_alert" name="Envoi email alerte"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_list_countries" name="Lister les pays">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_list_countries" name="Afficher liste pays"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_create_country" name="Ajouter un pays">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_create_country" name="Formulaire ajout pays"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_list_notifications" name="Consulter les notifications">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_list_notifications" name="Afficher historique notifications"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_list_users" name="Lister les utilisateurs">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_list_users" name="Afficher liste utilisateurs"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_create_user" name="Créer un utilisateur">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_create_user" name="Formulaire création utilisateur"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:UseCase" xmi:id="uc_delete_user" name="Supprimer un utilisateur">
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="activity_delete_user" name="Suppression compte utilisateur"/>
+    </packagedElement>
+    
+    <!-- Relations Actor-UseCase -->
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_login" name="">
+      <memberEnd xmi:idref="agent_login_end1"/>
+      <memberEnd xmi:idref="agent_login_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_login_end1" name="" association="assoc_agent_login" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_login_end2" name="" association="assoc_agent_login" type="uc_login"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_logout" name="">
+      <memberEnd xmi:idref="agent_logout_end1"/>
+      <memberEnd xmi:idref="agent_logout_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_logout_end1" name="" association="assoc_agent_logout" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_logout_end2" name="" association="assoc_agent_logout" type="uc_logout"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_dashboard" name="">
+      <memberEnd xmi:idref="agent_dashboard_end1"/>
+      <memberEnd xmi:idref="agent_dashboard_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_dashboard_end1" name="" association="assoc_agent_dashboard" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_dashboard_end2" name="" association="assoc_agent_dashboard" type="uc_dashboard"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_list_visas" name="">
+      <memberEnd xmi:idref="agent_list_visas_end1"/>
+      <memberEnd xmi:idref="agent_list_visas_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_list_visas_end1" name="" association="assoc_agent_list_visas" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_list_visas_end2" name="" association="assoc_agent_list_visas" type="uc_list_visas"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_create_visa" name="">
+      <memberEnd xmi:idref="agent_create_visa_end1"/>
+      <memberEnd xmi:idref="agent_create_visa_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_create_visa_end1" name="" association="assoc_agent_create_visa" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_create_visa_end2" name="" association="assoc_agent_create_visa" type="uc_create_visa"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_view_visa" name="">
+      <memberEnd xmi:idref="agent_view_visa_end1"/>
+      <memberEnd xmi:idref="agent_view_visa_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_view_visa_end1" name="" association="assoc_agent_view_visa" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_view_visa_end2" name="" association="assoc_agent_view_visa" type="uc_view_visa"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_send_alert" name="">
+      <memberEnd xmi:idref="agent_send_alert_end1"/>
+      <memberEnd xmi:idref="agent_send_alert_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_send_alert_end1" name="" association="assoc_agent_send_alert" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_send_alert_end2" name="" association="assoc_agent_send_alert" type="uc_send_alert"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_list_countries" name="">
+      <memberEnd xmi:idref="agent_list_countries_end1"/>
+      <memberEnd xmi:idref="agent_list_countries_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_list_countries_end1" name="" association="assoc_agent_list_countries" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_list_countries_end2" name="" association="assoc_agent_list_countries" type="uc_list_countries"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_create_country" name="">
+      <memberEnd xmi:idref="agent_create_country_end1"/>
+      <memberEnd xmi:idref="agent_create_country_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_create_country_end1" name="" association="assoc_agent_create_country" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_create_country_end2" name="" association="assoc_agent_create_country" type="uc_create_country"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_agent_list_notifications" name="">
+      <memberEnd xmi:idref="agent_list_notifications_end1"/>
+      <memberEnd xmi:idref="agent_list_notifications_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_list_notifications_end1" name="" association="assoc_agent_list_notifications" type="actor_agent"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="agent_list_notifications_end2" name="" association="assoc_agent_list_notifications" type="uc_list_notifications"/>
+    </packagedElement>
+    
+    <!-- Relations Admin -->
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_admin_login" name="">
+      <memberEnd xmi:idref="admin_login_end1"/>
+      <memberEnd xmi:idref="admin_login_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_login_end1" name="" association="assoc_admin_login" type="actor_admin"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_login_end2" name="" association="assoc_admin_login" type="uc_login"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_admin_list_users" name="">
+      <memberEnd xmi:idref="admin_list_users_end1"/>
+      <memberEnd xmi:idref="admin_list_users_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_list_users_end1" name="" association="assoc_admin_list_users" type="actor_admin"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_list_users_end2" name="" association="assoc_admin_list_users" type="uc_list_users"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_admin_create_user" name="">
+      <memberEnd xmi:idref="admin_create_user_end1"/>
+      <memberEnd xmi:idref="admin_create_user_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_create_user_end1" name="" association="assoc_admin_create_user" type="actor_admin"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_create_user_end2" name="" association="assoc_admin_create_user" type="uc_create_user"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_admin_delete_user" name="">
+      <memberEnd xmi:idref="admin_delete_user_end1"/>
+      <memberEnd xmi:idref="admin_delete_user_end2"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_delete_user_end1" name="" association="assoc_admin_delete_user" type="actor_admin"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="admin_delete_user_end2" name="" association="assoc_admin_delete_user" type="uc_delete_user"/>
+    </packagedElement>
+    
+    <!-- Relations Include -->
+    <packagedElement xmi:type="uml:Include" xmi:id="include_create_visa_list" name="include" addition="uc_list_visas" base="uc_create_visa"/>
+    <packagedElement xmi:type="uml:Include" xmi:id="include_create_country_list" name="include" addition="uc_list_countries" base="uc_create_country"/>
+    <packagedElement xmi:type="uml:Include" xmi:id="include_create_user_list" name="include" addition="uc_list_users" base="uc_create_user"/>
+    
+    <!-- Relations Extend -->
+    <packagedElement xmi:type="uml:Extend" xmi:id="extend_send_alert_view" name="extend" extendedCase="uc_view_visa" extension="uc_send_alert"/>
+    
+  </uml:Model>
+  
+  <!-- Diagram Information -->
+  <xmi:Extension extender="Visual Paradigm">
+    <diagrams>
+      <diagram xmi:id="diagram_use_cases" name="Diagramme de Cas d'Utilisation" type="UseCaseDiagram">
+        <elements>
+          <element xmi:idref="actor_agent" x="100" y="200"/>
+          <element xmi:idref="actor_admin" x="100" y="500"/>
+          <element xmi:idref="uc_login" x="350" y="100"/>
+          <element xmi:idref="uc_logout" x="350" y="200"/>
+          <element xmi:idref="uc_dashboard" x="350" y="300"/>
+          <element xmi:idref="uc_list_visas" x="600" y="100"/>
+          <element xmi:idref="uc_create_visa" x="600" y="200"/>
+          <element xmi:idref="uc_view_visa" x="600" y="300"/>
+          <element xmi:idref="uc_send_alert" x="600" y="400"/>
+          <element xmi:idref="uc_list_countries" x="850" y="100"/>
+          <element xmi:idref="uc_create_country" x="850" y="200"/>
+          <element xmi:idref="uc_list_notifications" x="850" y="300"/>
+          <element xmi:idref="uc_list_users" x="600" y="500"/>
+          <element xmi:idref="uc_create_user" x="600" y="600"/>
+          <element xmi:idref="uc_delete_user" x="600" y="700"/>
+        </elements>
+      </diagram>
+    </diagrams>
+  </xmi:Extension>
+</xmi:XMI>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DGM — Connexion Agent</title>
+    <title>DGM — Demande de compte</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
@@ -31,7 +31,6 @@
             padding: 20px;
         }
 
-        /* En-tête République */
         .republic-header {
             display: inline-flex;
             align-items: center;
@@ -51,11 +50,10 @@
             font-weight: 600;
         }
 
-        /* La carte Neumorphique */
         .login-card {
             width: 100%;
-            max-width: 400px;
-            padding: 40px;
+            max-width: 420px;
+            padding: 35px;
             border-radius: 40px;
             background-color: var(--bg-color);
             box-shadow: 13px 13px 20px #cbced1, 
@@ -64,54 +62,58 @@
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             background-color: var(--dgm-blue);
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 8px 8px 15px #a7aaaf, 
-                       -8px -8px 15px #ffffff;
         }
 
         .logo i {
             color: var(--dgm-gold);
-            font-size: 30px;
+            font-size: 25px;
         }
 
         h2 {
             font-weight: 700;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: var(--dgm-blue);
             margin-bottom: 5px;
         }
 
         .subtitle {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #777;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Alertes erreurs Laravel */
         .alert-error {
             background: #ffe5e5;
             color: #d9534f;
             padding: 10px;
             border-radius: 12px;
-            font-size: 0.8rem;
-            margin-bottom: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 15px;
             text-align: left;
-            box-shadow: inset 2px 2px 5px #e0b0b0;
         }
 
-        /* Style des champs */
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
         .input-group {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             border-radius: 15px;
@@ -120,62 +122,58 @@
         }
 
         .input-group i {
-            padding: 15px 5px 15px 20px;
+            padding: 12px 5px 12px 15px;
             color: var(--dgm-blue);
         }
 
-        .input-group input {
+        .input-group input, .input-group select {
             border: none;
             outline: none;
             background: none;
-            padding: 15px;
+            padding: 12px;
             width: 100%;
             color: #333;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        /* Bouton de connexion */
+        .file-input {
+            text-align: left;
+            padding: 10px 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
         .login-btn {
             width: 100%;
-            height: 55px;
+            height: 50px;
             border-radius: 15px;
             border: none;
             background-color: var(--dgm-blue);
             color: white;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            box-shadow: 3px 3px 10px #b1b1b1, 
-                       -3px -3px 10px #ffffff;
             transition: all 0.3s ease;
             margin-top: 10px;
         }
 
         .login-btn:hover {
             opacity: 0.9;
-            transform: translateY(-2px);
         }
 
-        .login-btn:active {
-            box-shadow: inset 2px 2px 5px #001a4d;
-        }
-
-        /* Footers */
         .card-footer {
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 0.7rem;
-            color: #888;
         }
 
-        .page-footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #999;
+        .card-footer a {
+            color: var(--dgm-blue);
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        .page-footer strong {
-            color: var(--dgm-gold);
+        .card-footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -188,11 +186,17 @@
 
     <div class="login-card">
         <div class="logo">
-            <i class="fas fa-passport"></i>
+            <i class="fas fa-user-plus"></i>
         </div>
         
-        <h2>DGM — LUBUMBASHI</h2>
-        <p class="subtitle">Accès Agents Habilités</p>
+        <h2>Demande de compte</h2>
+        <p class="subtitle">Soumettre une demande d'accès</p>
+
+        @if(session('success'))
+            <div class="alert-success">
+                <i class="fas fa-check-circle"></i> {{ session('success') }}
+            </div>
+        @endif
 
         @if ($errors->any())
             <div class="alert-error">
@@ -202,35 +206,49 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login.submit') }}">
+        <form method="POST" action="{{ route('register.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="email" placeholder="Email professionnel" value="{{ old('email') }}" required autofocus>
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" placeholder="Nom complet" value="{{ old('name') }}" required>
             </div>
             
             <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email professionnel" value="{{ old('email') }}" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-user-tag"></i>
+                <select name="role" required>
+                    <option value="agent" {{ old('role') == 'agent' ? 'selected' : '' }}>Agent DGM</option>
+                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Administrateur</option>
+                </select>
+            </div>
+
+            <div class="input-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" name="password" placeholder="Mot de passe" required>
+                <input type="password" name="password" placeholder="Mot de passe (min 6 caractères)" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password_confirmation" placeholder="Confirmer le mot de passe" required>
+            </div>
+
+            <div class="input-group file-input">
+                <i class="fas fa-camera" style="margin-right:10px;"></i>
+                <input type="file" name="photo" accept="image/*">
             </div>
 
             <button type="submit" class="login-btn">
-                SE CONNECTER
+                SOUMETTRE LA DEMANDE
             </button>
         </form>
 
         <div class="card-footer">
-            <i class="fas fa-shield-alt"></i> Système de Suivi Sécurisé
+            <a href="{{ route('login') }}"><i class="fas fa-arrow-left"></i> Retour à la connexion</a>
         </div>
-
-        <div class="card-footer" style="margin-top:15px;">
-            <a href="{{ route('register') }}"><i class="fas fa-user-plus"></i> Demander un compte</a>
-        </div>
-    </div>
-
-    <div class="page-footer">
-        <p>© {{ date('Y') }} DGM — Développé par <strong>OKIT</strong></p>
-        <p style="margin-top: 5px; opacity: 0.6;">Mémoire de fin d'études</p>
     </div>
 
 </body>

@@ -48,9 +48,13 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <div style="width:32px; height:32px; background:rgba(0,48,135,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-                                        <i class="fas fa-user text-primary" style="font-size:0.75rem;"></i>
-                                    </div>
+                                    @if($visa->photo)
+                                        <img src="{{ Storage::url($visa->photo) }}" class="rounded-circle" style="width:32px; height:32px; object-fit:cover;">
+                                    @else
+                                        <div style="width:32px; height:32px; background:rgba(0,48,135,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                            <i class="fas fa-user text-primary" style="font-size:0.75rem;"></i>
+                                        </div>
+                                    @endif
                                     <span class="fw-semibold" style="font-size:0.9rem;">{{ $visa->nom_etranger }}</span>
                                 </div>
                             </td>

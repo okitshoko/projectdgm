@@ -6,6 +6,7 @@ use App\Models\Visa;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Notification;
 
 class VisaController extends Controller
@@ -44,7 +45,13 @@ class VisaController extends Controller
             'date_expiration' => 'required|date',
             'email_contact' => 'required|email',
             'telephone_contact' => 'required',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('visas-photos', 'public');
+            $data['photo'] = $photoPath;
+        }
 
         Visa::create($data);
         return redirect()->route('visas.index')->with('success', 'Séjour enregistré.');

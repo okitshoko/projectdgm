@@ -11,7 +11,7 @@ class Visa extends Model
     protected $fillable = [
         'country_id', 'nom_etranger', 'numero_passeport', 
         'type_visa', 'date_entree', 'date_expiration', 
-        'email_contact', 'telephone_contact', 'statut'
+        'email_contact', 'telephone_contact', 'statut', 'photo'
     ];
 
     // Le visa appartient à un pays

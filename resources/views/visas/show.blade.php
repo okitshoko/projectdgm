@@ -19,6 +19,20 @@
 </div>
 
 <div class="row g-4">
+    {{-- Photo --}}
+    @if($visa->photo)
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header dgm-header">
+                <i class="fas fa-camera me-2"></i>Photo du passeport
+            </div>
+            <div class="card-body text-center">
+                <img src="{{ Storage::url($visa->photo) }}" alt="Photo passeport" class="img-fluid rounded" style="max-height: 300px;">
+            </div>
+        </div>
+    </div>
+    @endif
+
     {{-- Carte principale --}}
     <div class="col-md-8">
         <div class="card">

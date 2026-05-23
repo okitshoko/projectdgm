@@ -15,14 +15,52 @@
             --dgm-gold: #C8A951;
             --dgm-dark: #0a0f1e;
             --dgm-light: #f0f4f8;
+            --bg-body: #f0f4f8;
+            --text-body: #1a1a2e;
+            --card-bg: #ffffff;
+            --card-border: rgba(0,0,0,0.06);
+            --table-border: #eef0f5;
+            --table-hover: rgba(0,48,135,0.04);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0f1419;
+            --text-body: #e4e6eb;
+            --card-bg: #1c2128;
+            --card-border: rgba(255,255,255,0.06);
+            --table-border: #2d333b;
+            --table-hover: rgba(255,255,255,0.04);
         }
 
         * { font-family: 'Inter', sans-serif; }
 
         body {
-            background-color: var(--dgm-light);
-            color: #1a1a2e;
+            background-color: var(--bg-body);
+            color: var(--text-body);
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .theme-toggle i {
+            transition: transform 0.3s;
+        }
+        .theme-toggle .fa-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .fa-sun { display: inline; }
+        [data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+        [data-theme="dark"] .theme-toggle i { transform: rotate(180deg); }
 
         /* ===== NAVBAR ===== */
         .navbar-dgm {
@@ -75,11 +113,15 @@
             border: none;
             border-radius: 12px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            background-color: var(--card-bg);
+            transition: background-color 0.3s;
         }
         .card-header {
             border-radius: 12px 12px 0 0 !important;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid var(--card-border);
             font-weight: 600;
+            background-color: var(--card-bg);
+            transition: background-color 0.3s, border-color 0.3s;
         }
         .card-header.dgm-header {
             background: linear-gradient(135deg, var(--dgm-blue), #1a4a9e);
@@ -91,6 +133,11 @@
         }
 
         /* ===== TABLES ===== */
+        .table {
+            --bs-table-bg: var(--card-bg);
+            --bs-table-color: var(--text-body);
+            --bs-table-border-color: var(--table-border);
+        }
         .table thead th {
             background: var(--dgm-blue);
             color: #fff;
@@ -102,13 +149,14 @@
             padding: 0.85rem 1rem;
         }
         .table tbody tr:hover {
-            background-color: rgba(0,48,135,0.04);
+            background-color: var(--table-hover);
         }
         .table tbody td {
             vertical-align: middle;
             padding: 0.8rem 1rem;
             font-size: 0.9rem;
-            border-color: #eef0f5;
+            border-color: var(--table-border);
+            color: var(--text-body);
         }
 
         /* ===== BUTTONS ===== */
@@ -274,13 +322,29 @@
                                 <i class="fas fa-users-cog me-1"></i> Administration
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.requests.*') ? 'active' : '' }}" href="{{ route('admin.requests.index') }}">
+                                <i class="fas fa-user-clock me-1"></i> Demandes
+                            </a>
+                        </li>
                         @endif
+
+                        <li class="nav-item">
+                            <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                            </button>
+                        </li>
 
                         <li class="nav-item dropdown ms-lg-2">
                             <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
-                                <div style="background: var(--dgm-gold); border-radius: 50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center;">
-                                    <i class="fas fa-user text-dark" style="font-size:0.75rem;"></i>
-                                </div>
+                                @if(Auth::user()->photo)
+                                    <img src="{{ Storage::url(Auth::user()->photo) }}" class="rounded-circle" style="width:30px; height:30px; object-fit:cover;">
+                                @else
+                                    <div style="background: var(--dgm-gold); border-radius: 50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center;">
+                                        <i class="fas fa-user text-dark" style="font-size:0.75rem;"></i>
+                                    </div>
+                                @endif
                                 <span>{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="border-radius:10px; min-width:200px;">
@@ -293,6 +357,16 @@
                                 </li>
                                 <li><hr class="dropdown-divider my-1"></li>
                                 <li>
+                                    <a class="dropdown-item py-2" href="{{ route('profile.edit') }}">
+                                        <i class="fas fa-user me-2"></i>Mon profil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2" href="{{ route('password.edit') }}">
+                                        <i class="fas fa-lock me-2"></i>Changer le mot de passe
+                                    </a>
+                                </li>
+                                <li>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item text-danger py-2">
@@ -303,6 +377,12 @@
                             </ul>
                         </li>
                     @else
+                        <li class="nav-item">
+                            <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                            </button>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
                                 <i class="fas fa-lock me-1"></i> Connexion Agent
@@ -378,5 +458,26 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
 </body>
 </html>

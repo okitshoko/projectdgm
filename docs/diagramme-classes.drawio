@@ -1,0 +1,70 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram id="anafi-class-diagram" name="Diagramme de Classes - Anafi">
+    <mxGraphModel dx="1223" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="user-class" value="User" style="shape=mxgraph.uml.class;classNaming=0;align=center;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="140" y="120" width="240" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="user-attrs" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;- id: bigint&lt;br&gt;- name: string&lt;br&gt;- email: string&lt;br&gt;- password: string&lt;br&gt;- role: string&lt;br&gt;- email_verified_at: datetime&lt;br&gt;- remember_token: string&lt;br&gt;- created_at: datetime&lt;br&gt;- updated_at: datetime&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="user-class" vertex="1">
+          <mxGeometry y="35" width="240" height="157.5" as="geometry" />
+        </mxCell>
+        <mxCell id="user-methods" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;+ isAdmin(): bool&lt;br&gt;+ __construct()&lt;br&gt;+ casts(): array&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="user-class" vertex="1">
+          <mxGeometry y="192.5" width="240" height="87.5" as="geometry" />
+        </mxCell>
+        <mxCell id="country-class" value="Country" style="shape=mxgraph.uml.class;classNaming=0;align=center;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="100" width="280" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="country-attrs" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;- id: bigint&lt;br&gt;- nom_pays: string&lt;br&gt;- code_iso: string&lt;br&gt;- created_at: datetime&lt;br&gt;- updated_at: datetime&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;strokeWidth=2;" parent="country-class" vertex="1">
+          <mxGeometry y="40" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="country-methods" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;+ visas(): HasMany&lt;br&gt;+ __construct()&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="country-class" vertex="1">
+          <mxGeometry y="180" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="visa-class" value="Visa" style="shape=mxgraph.uml.class;classNaming=0;align=center;overflow=fill;html=1;whiteSpace=wrap;strokeWidth=6;" parent="1" vertex="1">
+          <mxGeometry x="500" y="450" width="280" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="visa-attrs" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;- id: bigint&lt;br&gt;- country_id: bigint&lt;br&gt;- nom_etranger: string&lt;br&gt;- numero_passeport: string&lt;br&gt;- type_visa: string&lt;br&gt;- date_entree: date&lt;br&gt;- date_expiration: date&lt;br&gt;- email_contact: string&lt;br&gt;- telephone_contact: string&lt;br&gt;- statut: string&lt;br&gt;- created_at: datetime&lt;br&gt;- updated_at: datetime&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="visa-class" vertex="1">
+          <mxGeometry y="40" width="280" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="visa-methods" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;+ country(): BelongsTo&lt;br&gt;+ notifications(): HasMany&lt;br&gt;+ __construct()&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="visa-class" vertex="1">
+          <mxGeometry y="280" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="notification-class" value="Notification" style="shape=mxgraph.uml.class;classNaming=0;align=center;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="900" y="450" width="280" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="notification-attrs" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;- id: bigint&lt;br&gt;- visa_id: bigint&lt;br&gt;- type_alerte: string&lt;br&gt;- statut_envoi: string&lt;br&gt;- date_envoi: datetime&lt;br&gt;- message: text&lt;br&gt;- created_at: datetime&lt;br&gt;- updated_at: datetime&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="notification-class" vertex="1">
+          <mxGeometry y="40" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="notification-methods" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;+ visa(): BelongsTo&lt;br&gt;+ __construct()&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;overflow=fill;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=11;" parent="notification-class" vertex="1">
+          <mxGeometry y="220" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="country-visa-relation" value="1..*" style="endArrow=diamondThin;endFill=0;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="country-class" target="visa-class" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="visa-country-relation" value="1" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="visa-class" target="country-class" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="visa-notification-relation" value="1..*" style="endArrow=diamondThin;endFill=0;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="visa-class" target="notification-class" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="notification-visa-relation" value="1" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="notification-class" target="visa-class" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="Diagramme de Classes - Application Anafi&#xa;Gestion des Visas et Notifications" style="text;html=1;align=center;verticalAlign=middle;rounded=0;shadow=0;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="20" width="500" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Légende&lt;br&gt;─────────────&lt;br&gt;─1──* Relation 1 à plusieurs&lt;br&gt;─────────────&lt;br&gt;BelongsTo : Appartient à&lt;br&gt;HasMany : A plusieurs&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=top;rounded=0;shadow=0;strokeColor=#666666;fillColor=#f5f5f5;fontSize=11;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="940" y="130" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="qXZ64eb1pgzgw4Ghos_W-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="80" y="470" width="320" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="qXZ64eb1pgzgw4Ghos_W-2" value="voyager&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="435" y="403" width="70" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

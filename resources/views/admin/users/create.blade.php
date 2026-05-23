@@ -30,8 +30,18 @@
                     </div>
                 @endif
 
-                <form action="{{ route('admin.users.store') }}" method="POST">
+                <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" style="font-size:0.85rem;">
+                            <i class="fas fa-camera me-1 text-muted"></i>Photo de profil
+                        </label>
+                        <input type="file" class="form-control" name="photo" accept="image/*">
+                        <div class="form-text" style="font-size:0.78rem;">
+                            <i class="fas fa-info-circle me-1"></i>Formats acceptés: JPEG, PNG, JPG, GIF (max 2Mo)
+                        </div>
+                    </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold" style="font-size:0.85rem;">

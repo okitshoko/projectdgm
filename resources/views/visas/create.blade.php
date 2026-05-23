@@ -30,10 +30,44 @@
                     </div>
                 @endif
 
-                <form action="{{ route('visas.store') }}" method="POST">
+                <form action="{{ route('visas.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- Section 1 : Identité --}}
+                    {{-- Photo --}}
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div style="width:28px; height:28px; background:var(--dgm-blue); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                                <span style="color:#fff; font-size:0.75rem; font-weight:700;">1</span>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color:var(--dgm-blue); text-transform:uppercase; letter-spacing:0.5px; font-size:0.82rem;">
+                                Photo du passeport (optionnel)
+                            </h6>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" style="font-size:0.85rem;">
+                                    <i class="fas fa-camera me-1 text-muted"></i>Photo du passeport
+                                </label>
+                                <input type="file" class="form-control" name="photo" accept="image/*">
+                                <div class="form-text" style="font-size:0.78rem;">
+                                    <i class="fas fa-info-circle me-1"></i>Formats acceptés: JPEG, PNG, JPG, GIF (max 2Mo)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="border-color:#eef0f5;">
+
+                    {{-- Section 2 : Identité --}}
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <div style="width:28px; height:28px; background:var(--dgm-blue); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+                                <span style="color:#fff; font-size:0.75rem; font-weight:700;">2</span>
+                            </div>
+                            <h6 class="mb-0 fw-bold" style="color:var(--dgm-blue); text-transform:uppercase; letter-spacing:0.5px; font-size:0.82rem;">
+                                Identité du ressortissant
+                            </h6>
+                        </div>
                     <div class="mb-4">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <div style="width:28px; height:28px; background:var(--dgm-blue); border-radius:50%; display:flex; align-items:center; justify-content:center;">
@@ -90,11 +124,11 @@
 
                     <hr style="border-color:#eef0f5;">
 
-                    {{-- Section 2 : Dates --}}
+                    {{-- Section 3 : Dates --}}
                     <div class="mb-4">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <div style="width:28px; height:28px; background:var(--dgm-blue); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                                <span style="color:#fff; font-size:0.75rem; font-weight:700;">2</span>
+                                <span style="color:#fff; font-size:0.75rem; font-weight:700;">3</span>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color:var(--dgm-blue); text-transform:uppercase; letter-spacing:0.5px; font-size:0.82rem;">
                                 Période de séjour
@@ -120,11 +154,11 @@
 
                     <hr style="border-color:#eef0f5;">
 
-                    {{-- Section 3 : Contacts --}}
+                    {{-- Section 4 : Contacts --}}
                     <div class="mb-4">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <div style="width:28px; height:28px; background:var(--dgm-blue); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                                <span style="color:#fff; font-size:0.75rem; font-weight:700;">3</span>
+                                <span style="color:#fff; font-size:0.75rem; font-weight:700;">4</span>
                             </div>
                             <h6 class="mb-0 fw-bold" style="color:var(--dgm-blue); text-transform:uppercase; letter-spacing:0.5px; font-size:0.82rem;">
                                 Contacts pour les alertes

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -44,14 +45,66 @@ class UserController extends Controller
             'email'    => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
             'role'     => 'required|in:admin,agent',
+            'photo'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $data['password'] = Hash::make($data['password']);
+
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('users-photos', 'public');
+            $data['photo'] = $photoPath;
+        }
 
         User::create($data);
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Compte créé avec succès.');
+    }
+
+    public function editPassword()
+    {
+        return view('admin.users.password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|current_password',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        auth()->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return back()->with('success', 'Mot de passe modifié avec succès.');
+    }
+
+    public function editProfile()
+    {
+        return view('admin.users.profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo) {
+                Storage::delete('public/' . $user->photo);
+            }
+            $photoPath = $request->file('photo')->store('users-photos', 'public');
+            $data['photo'] = $photoPath;
+        }
+
+        $user->update($data);
+
+        return back()->with('success', 'Profil mis à jour avec succès.');
     }
 
     /**
